@@ -60,7 +60,7 @@
                                     <label for="nama_mhs" class="form-control-label">Nama Mahasiswa</label>
                                     <input type="text" name="nama_mhs" value="{{ old('nama_mhs') }}"
                                         class="form-control" @error('nama_mhs') is-invalid @enderror
-                                        placeholder="Isi nama anda dengan huruf kapital" />
+                                        placeholder="Isi nama anda....." style="text-transform: uppercase" />
                                     @error('nama_mhs') <div class="text-muted">{{ $message }}</div>@enderror
                                 </div>
 
@@ -137,7 +137,7 @@
 
                                 {{-- inputan nilai_un --}}
                                 <div class="form-group">
-                                    <label for="nilai_un" class="form-control-label">Usia Penanggung</label>
+                                    <label for="nilai_un" class="form-control-label">Nilai UN</label>
                                     <select class="form-control" id="nilai_un" name="nilai_un">
                                         <option>KURANG</option>
                                         <option>CUKUP</option>
