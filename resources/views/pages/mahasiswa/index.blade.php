@@ -47,7 +47,7 @@
                             <p class="text-danger font-weight-bold">Perhatian: Sebelum Mengisi Data diri anda pastikan
                                 Klik Menu "Panduan"</p>
                             <p class="text-primary font-weight-bold">Contoh Detail Tabel Pengisian</p>
-                            <img src="{{ asset('img') }}/detailinput.jpg" alt="DETAILINPUT" width="800px"
+                            <img src="{{ asset('img') }}/detailinputnew.jpg" alt="DETAILINPUT" width="800px"
                                 class="border border-primary">
                             <p class="text-primary font-weight-bold">*Masukkan Data sesuaikan Detail Tabel Pengisian</p>
 
