@@ -60,7 +60,7 @@
                                     <label for="nama_mhs" class="form-control-label">Nama Mahasiswa</label>
                                     <input type="text" name="nama_mhs" value="{{ old('nama_mhs') }}"
                                         class="form-control" @error('nama_mhs') is-invalid @enderror
-                                        placeholder="Isi nama anda....." style="text-transform: uppercase" />
+                                        placeholder="Isi nama anda dengan huruf Kapital..."  />
                                     @error('nama_mhs') <div class="text-muted">{{ $message }}</div>@enderror
                                 </div>
 
