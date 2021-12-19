@@ -35,102 +35,115 @@
                         <div class="col">
 
                             <!-- Data diri mahasiswa -->
-
+                            @if (session('pesan'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('pesan') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
 
                             <p class="text-danger font-weight-bold">Perhatian: Sebelum Mengisi Data diri anda pastikan
                                 Klik Menu "Panduan"</p>
                             <p class="text-primary font-weight-bold">Contoh Detail Tabel Pengisian</p>
-                            <p class="text-primary font-weight-bold">Masukkan Data sesuaikan Detail Tabel Pengisian</p>
+                            <img src="{{ asset('img') }}/detailinput.jpg" alt="DETAILINPUT" width="800px"
+                                class="border border-primary">
+                            <p class="text-primary font-weight-bold">*Masukkan Data sesuaikan Detail Tabel Pengisian</p>
 
-                            <img src="{{ asset('img') }}/detailinput.jpg" alt="">
-
-                                @if (session('pesan'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ session('pesan') }}</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-
-
-                            <form action="/inputdatamhs/store" method="POST">
+                            {{-- FORM INPUT MAHASISWA --}}
+                            <form action="/inputdatamhs/store" method="POST" class="mt-4">
                                 @csrf
 
                                 {{-- inputan nama mahasiswa --}}
                                 <div class="form-group">
                                     <label for="nama_mhs" class="form-control-label">Nama Mahasiswa</label>
                                     <input type="text" name="nama_mhs" value="{{ old('nama_mhs') }}"
-                                        class="form-control" @error('nama_mhs') is-invalid @enderror />
+                                        class="form-control" @error('nama_mhs') is-invalid @enderror
+                                        placeholder="Isi nama anda dengan huruf kapital" />
                                     @error('nama_mhs') <div class="text-muted">{{ $message }}</div>@enderror
                                 </div>
 
                                 {{-- inputan tipe penanggung --}}
                                 <div class="form-group">
                                     <label for="penanggung" class="form-control-label">Penanggung</label>
-                                    <input type="text" name="penanggung" value="{{ old('penanggung') }}"
-                                        class="form-control" @error('penanggung') is-invalid @enderror />
-                                    @error('penanggung') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="penanggung" name="penanggung">
+                                        <option>ORANG TUA</option>
+                                        <option>WALI</option>
+                                        <option>DIRI SENDIRI</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan penghasilan penanggung --}}
                                 <div class="form-group">
                                     <label for="penghasilan" class="form-control-label">Penghasilan
                                         Penanggung</label>
-                                    <input type="text" name="penghasilan" value="{{ old('penghasilan') }}"
-                                        class="form-control" @error('penghasilan') is-invalid @enderror />
-                                    @error('penghasilan') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="penghasilan" name="penghasilan">
+                                        <option>RENDAH</option>
+                                        <option>CUKUP</option>
+                                        <option>RATA-RATA</option>
+                                        <option>TINGGI</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan Kepemilikan Rumah --}}
                                 <div class="form-group">
                                     <label for="rumah" class="form-control-label">Kepemilikan Rumah</label>
-                                    <input type="text" name="rumah" value="{{ old('rumah') }}" class="form-control"
-                                        @error('rumah') is-invalid @enderror />
-                                    @error('rumah') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="rumah" name="rumah">
+                                        <option>RUMAH SENDIRI</option>
+                                        <option>RUMAH SEWA</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan Jenis Kelamin Penanggung --}}
                                 <div class="form-group">
                                     <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin
                                         Penanggung</label>
-                                    <input type="text" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}"
-                                        class="form-control" @error('jenis_kelamin') is-invalid @enderror />
-                                    @error('jenis_kelamin') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                                        <option>LAKI-LAKI</option>
+                                        <option>PEREMPUAN</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan Pekerjaan Penanggung --}}
                                 <div class="form-group">
                                     <label for="pekerjaan" class="form-control-label">Pekerjaan Penanggung</label>
-                                    <input type="text" name="pekerjaan" value="{{ old('pekerjaan') }}"
-                                        class="form-control" @error('pekerjaan') is-invalid @enderror />
-                                    @error('pekerjaan') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="pekerjaan" name="pekerjaan">
+                                        <option>PEKERJA TETAP</option>
+                                        <option>PEKERJA TIDAK TETAP</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan Jumlah Tanggungan --}}
                                 <div class="form-group">
                                     <label for="jumlah_tanggungan" class="form-control-label">Jumlah
                                         Tanggungan</label>
-                                    <input type="text" name="jumlah_tanggungan" value="{{ old('jumlah_tanggungan') }}"
-                                        class="form-control" @error('jumlah_tanggungan') is-invalid @enderror />
-                                    @error('jumlah_tanggungan') <div class="text-muted">{{ $message }}</div>
-                                    @enderror
+                                    <select class="form-control" id="jumlah_tanggungan" name="jumlah_tanggungan">
+                                        <option>SEDIKIT</option>
+                                        <option>SEDANG</option>
+                                        <option>BANYAK</option>
+                                        <option>TIDAK ADA</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan usia penanggung --}}
                                 <div class="form-group">
                                     <label for="usia" class="form-control-label">Usia Penanggung</label>
-                                    <input type="text" name="usia" value="{{ old('usia') }}" class="form-control"
-                                        @error('usia') is-invalid @enderror />
-                                    @error('usia') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="usia" name="usia">
+                                        <option>MUDA</option>
+                                        <option>TUA</option>
+                                    </select>
                                 </div>
 
                                 {{-- inputan nilai_un --}}
                                 <div class="form-group">
                                     <label for="nilai_un" class="form-control-label">Usia Penanggung</label>
-                                    <input type="text" name="nilai_un" value="{{ old('nilai_un') }}"
-                                        class="form-control" @error('nilai_un') is-invalid @enderror />
-                                    @error('nilai_un') <div class="text-muted">{{ $message }}</div>@enderror
+                                    <select class="form-control" id="nilai_un" name="nilai_un">
+                                        <option>KURANG</option>
+                                        <option>CUKUP</option>
+                                        <option>BAIK</option>
+                                        <option>SANGAT BAIK</option>
+                                    </select>
                                 </div>
 
 
