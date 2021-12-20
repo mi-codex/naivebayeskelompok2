@@ -63,6 +63,7 @@
                                 <span class="nav-link-text">Input Data Mahasiswa</span>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('hasilbeasiswa') ? 'active' : '' }}"
                                 href="/hasilbeasiswa">
@@ -70,7 +71,6 @@
                                 <span class="nav-link-text">Hasil Beasiswa</span>
                             </a>
                         </li>
-                        @endif
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('panduan') ? 'active' : '' }}"
                                 href="/panduan">

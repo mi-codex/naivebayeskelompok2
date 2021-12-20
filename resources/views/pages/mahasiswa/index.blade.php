@@ -44,7 +44,7 @@
                             </div>
                             @endif
 
-                            <p class="text-danger font-weight-bold bg-info">Perhatian: Sebelum mengisi Data diri anda pastikan
+                            <p class="text-white text-center font-weight-bold bg-info">Perhatian: Sebelum mengisi Data diri anda pastikan
                                 Klik Menu "Panduan"</p>
                             <p class="text-primary font-weight-bold">Contoh Detail Tabel Pengisian</p>
                             <img src="{{ asset('img') }}/detailinputnew.jpg" alt="DETAILINPUT" width="800px"

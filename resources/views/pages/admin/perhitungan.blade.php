@@ -28,7 +28,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header bg-transparent">
-                    <h3 class="mb-0">Data Mahasiswa</h3>
+                    <h3 class="mb-0">Perhitungan Naive Bayes Data Mahasiswa</h3>
                 </div>
                 <div class="card-body">
 
@@ -36,9 +36,9 @@
                     <div class="row mb-3">
                         <div class="col">
                             <!-- Data Set -->
-                            <p class="text-white font-weight-bold bg-info"> Perhatian: Sebelum mengisi Data, pastikan
+                            <p class="text-white text-center font-weight-bold bg-info"> Perhatian: Sebelum mengisi Data, pastikan
                                 Klik Menu "Panduan"</p>
-                            <h2 class="text-success">Data Set</h2> <br>
+                            <h2 class="text-success">Tabel Data Set</h2> <br>
                             <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
                             <button type="button" class="btn btn-success " data-toggle="modal" data-target="#exampleModal">
                                 Import Data
@@ -70,11 +70,10 @@
                                             <div class="modal-body">
                                                
                                                     <div class="form-group">
-                                                      <label for="exampleFormControlFile1">Example file input</label>
+                                                      <label for="exampleFormControlFile1">Import File Excel (Upload)</label>
                                                       <input type="file" class="form-control-file" id="exampleFormControlFile1">
                                                     </div>
                                                   
-
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -127,9 +126,10 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-5">
                         <div class="col">
-                            <h2 class="text-info">Jumlah Data Input Mahasiswa Masuk = {{ $jumlahdata }}</h2>
+                            <h2 class="text-info">Jumlah Total Data Input Mahasiswa Masuk = {{ $jumlahdata }}</h2>
+                            <a href="#" class="btn btn-info">Mulai Perhitungan Naive</a>
                         </div>
                     </div>
                 </div>

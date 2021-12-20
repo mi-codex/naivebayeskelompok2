@@ -27,6 +27,7 @@ Auth::routes();
 
 Route::get('/beranda', [HomeController::class, 'index'])->name('home');
 Route::get('/panduan', [Panduan::class, 'index']);
+Route::get('/hasilbeasiswa', [HasilBeasiswa::class, 'index']);
 
 //! Admin
 Route::group(['middleware' => 'admin'], function () {
@@ -40,7 +41,7 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'user'], function () {
     Route::get('/inputdatamhs', [InputdataMahasiswa::class, 'index'])->name('input');
     Route::post('/inputdatamhs/store', [InputdataMahasiswa::class, 'store']);
-    Route::get('/hasilbeasiswa', [HasilBeasiswa::class, 'index']);
+    
 });
 //-------------------------------------------
 

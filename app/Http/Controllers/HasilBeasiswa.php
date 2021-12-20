@@ -17,7 +17,7 @@ class HasilBeasiswa extends Controller
     }
     public function index()
     {
-        return view('pages.mahasiswa.hasilbeasiswa');
+        return view('pages.v_hasilbeasiswa');
     }
 
     /**
