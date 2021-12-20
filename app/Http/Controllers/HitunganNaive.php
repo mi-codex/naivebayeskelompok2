@@ -18,7 +18,11 @@ class HitunganNaive extends Controller
     }
     public function index()
     {
-        return view('pages.admin.perhitungan');
+        $items = Naive::all();
+
+        return view('pages.admin.perhitungan')->with([
+            'items' => $items
+        ]);
     }
 
     /**
