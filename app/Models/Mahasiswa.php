@@ -9,9 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Mahasiswa extends Model
 {
     use SoftDeletes;
-
+    protected $table = "mahasiswas";
+    protected $primarykey = "id";
     protected $fillable = [
-        'nama_mhs', 'penanggung', 'penghasilan', 'rumah', 'jenis_kelamin', 'pekerjaan', 'jumlah_tanggungan', 'usia', 'nilai_un'
+        'nama_mhs', 
+        'penanggung', 
+        'penghasilan', 
+        'rumah', 
+        'jenis_kelamin', 
+        'pekerjaan', 
+        'jumlah_tanggungan', 
+        'usia', 
+        'nilai_un'
     ];
 
     protected $hidden = [];

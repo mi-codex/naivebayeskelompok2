@@ -36,7 +36,9 @@
                     <div class="row mb-3">
                         <div class="col">
                             <!-- Data Set -->
-                            <h3 class="text-success">Data Set</h3> <br>
+                            <p class="text-danger font-weight-bold">Perhatian: Sebelum mengisi Data, pastikan
+                                Klik Menu "Panduan"</p>
+                            <h2 class="text-success">Data Set</h2> <br>
                             <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
                             <button type="button" class="btn btn-success " data-toggle="modal" data-target="#exampleModal">
                                 Import Data
@@ -123,6 +125,11 @@
 
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <h2 class="text-info">Jumlah Data Input Mahasiswa Masuk = {{ $jumlahdata }}</h2>
                         </div>
                     </div>
                 </div>

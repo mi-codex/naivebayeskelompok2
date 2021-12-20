@@ -51,7 +51,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('perhitungan') ? 'active' : '' }}"
                                 href="/perhitungan">
-                                <i class="ni ni-chart-pie-35 text-orange"></i>
+                                <i class="ni ni-chart-pie-35 text-info"></i>
                                 <span class="nav-link-text">Perhitungan</span>
                             </a>
                         </li>

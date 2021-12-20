@@ -9,10 +9,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Controllers\Controller;
 
-
-
 use Illuminate\Http\Request;
 use App\Models\Naive;
+use App\Models\Mahasiswa;
 
 class HitunganNaive extends Controller
 {
@@ -28,9 +27,12 @@ class HitunganNaive extends Controller
     public function index()
     {
         $items = Naive::all();
+        $jumlahdata =  Mahasiswa::count();
 
         return view('pages.admin.perhitungan')->with([
-            'items' => $items
+            'items' => $items,
+            'jumlahdata' => $jumlahdata,
+            
         ]);
     }
     //EXPORT EXCEL ----------------------

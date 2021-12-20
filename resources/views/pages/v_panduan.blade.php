@@ -40,8 +40,21 @@
 
                     </div>
                     <div class="card-body m-2">
-
-                        <h3 class="text-primary">Tata Cara Pengisian Data</h3>
+                        @if (auth()->user()->level==1)
+                        <h3 class="text-primary">Tata Cara Pengisian Data Sebagai Admin</h3>
+                        <div class="text-primary">
+                            <ol>
+                                <li>Klik Menu "Perhitungan"</li>
+                                <li>Import Datasets yang diberikan</li>
+                                <li>Export Datasets bila diperlukan</li>
+                                <li>Setelah Mengimport data, Maka dataset yang anda import akan muncul dibawah kedua tombol tersebut</li>
+                                <li>Pastikan Sebelum Melakukan Perhitungan Cek Data Masuk Terlebih dahulu</li>
+                            </ol>
+                            <p class="text-danger font-weight-bold">PERHATIAN: Isi data anda secara jujur! dan bila data
+                                yang diberikan tidak sesuai maka akan ada sanksi yang anda terima bahkan termasuk Admin.</p>
+                        </div>
+                        @elseif (auth()->user()->level==2)
+                        <h3 class="text-primary">Tata Cara Pengisian Data Sebagai Mahasiswa</h3>
                         <div class="text-primary">
                             <ol>
                                 <li>Klik Menu "Input Data Mahasiswa"</li>
@@ -52,7 +65,7 @@
                                 yang diberikan tidak sesuai maka akan ada sanksi yang anda terima. Aplikasi ini tidak hanya
                                 ditentukan oleh nilai UN Anda.</p>
                         </div>
-
+                        @endif
 
 
                     </div>
