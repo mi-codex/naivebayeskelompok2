@@ -30,7 +30,6 @@ Route::get('/panduan', [Panduan::class, 'index']);
 
 //! Admin
 Route::group(['middleware' => 'admin'], function () {
-
     Route::get('/perhitungan', [HitunganNaive::class, 'index']);
 });
 //-------------------------------------------
