@@ -36,7 +36,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <!-- Data Set -->
-                            <p class="text-danger font-weight-bold">Perhatian: Sebelum mengisi Data, pastikan
+                            <p class="text-white font-weight-bold bg-info"> Perhatian: Sebelum mengisi Data, pastikan
                                 Klik Menu "Panduan"</p>
                             <h2 class="text-success">Data Set</h2> <br>
                             <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
