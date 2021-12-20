@@ -36,19 +36,16 @@ class HitunganNaive extends Controller
     //EXPORT EXCEL ----------------------
     public function naiveExportExcel()
     {
-        return Excel::download(new NaiveExport, 'users.xlsx');
+        return Excel::download(new NaiveExport, 'Datasetmahasiswa.xlsx');
     }
 
     //IMPORT EXCEL ----------------------
     public function naiveImportExcel(Request $request)
     {
-        $file = $request->file('file');
-        $namafile = $file->getClientOriginalName();
-        $file->move('Datasetdummy', $namafile);
+       
+        Excel::import(new NaiveImport, 'datasets.xlsx');
 
-        Excel::import(new NaiveImport, public_path('/Datasetdummy/' . $namafile));
-
-        return redirect()->route('input')->with('pesan', 'Dataset Berhasil ditambakan');
+        return redirect()->route('naive')->with('pesan', 'Dataset Berhasil ditambakan');
     }
 
     /**

@@ -32,7 +32,7 @@ Route::get('/panduan', [Panduan::class, 'index']);
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/perhitungan', [HitunganNaive::class, 'index'])->name('naive');
     Route::get('/perhitungan/naiveExport', [HitunganNaive::class, 'naiveExportExcel']);
-    Route::post('/perhitungan/naiveImport', [HitunganNaive::class, 'naiveImportExcel']);
+    Route::post('/perhitungan/naiveImport', [HitunganNaive::class, 'naiveImportExcel'])->name('import');
 });
 //-------------------------------------------
 

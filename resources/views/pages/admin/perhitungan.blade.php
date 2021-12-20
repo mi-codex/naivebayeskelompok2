@@ -38,10 +38,18 @@
                             <!-- Data Set -->
                             <h3 class="text-success">Data Set</h3> <br>
                             <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
-                            <button type="button" class="btn btn-success" data-toggle="modal"
-                                data-target="#exampleModal">
+                            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#exampleModal">
                                 Import Data
                             </button>
+
+                            @if (session('pesan'))
+                            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                <strong>{{ session('pesan') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -54,22 +62,24 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            {{-- IMPORT DATA EXCEL --}}
-                                            <form action="/perhitungan/naiveImport" method="POST" enctype="multipart/form-data">
-                                                {{ csrf_field() }}
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlFile1">Masukkan File Excel</label>
-                                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="fileexcel" required>
-                                                </div>
-                                            </form>
-                                            {{-- <a href="/downloadfile" class="text-sm text-success"> >>Download Contoh Format Excel</a> --}}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success">Kirim Data</button>
-                                        </div>
+                                        {{-- IMPORT DATA EXCEL --}}
+                                        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="modal-body">
+                                               
+                                                    <div class="form-group">
+                                                      <label for="exampleFormControlFile1">Example file input</label>
+                                                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                    </div>
+                                                  
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Kembali</button>
+                                                <button type="submit" class="btn btn-success">Kirim Data</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +101,7 @@
                                         <th>JUMLAH TANGGUNGAN</th>
                                         <th>USIA</th>
                                         <th>NILAI UN</th>
-                                        <th >STATUS BEASISWA</th>
+                                        <th>STATUS BEASISWA</th>
                                     </tr>
                                 </thead>
                                 <tbody>
