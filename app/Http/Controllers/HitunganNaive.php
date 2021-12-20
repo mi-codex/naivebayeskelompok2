@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Naive;
 
 class HitunganNaive extends Controller
 {
@@ -84,5 +85,11 @@ class HitunganNaive extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function downloadFile()
+    {
+        $path = public_path('excel/contoh_format_dataset.xlsx');
+        return response()->download($path);
     }
 }

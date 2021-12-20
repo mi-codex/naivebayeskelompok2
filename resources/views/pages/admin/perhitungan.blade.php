@@ -59,7 +59,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleFormControlFile1">Masukkan File Excel</label>
                                                         <input type="file" class="form-control-file"
-                                                            id="exampleFormControlFile1">
+                                                            id="exampleFormControlFile1" name="fileexcel">
                                                     </div>
                                                 </form>
                                                 <a href="/downloadfile" class="text-sm text-success"> >>Download Contoh
@@ -91,11 +91,4 @@
 
 @endsection
 
-@push('scripts')
-    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#daftarMhs').DataTable();
-        });
-    </script>
-@endpush
+
