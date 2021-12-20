@@ -2,6 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NaiveExport;
+use App\Imports\NaiveImport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+use App\Http\Controllers\Controller;
+
+
+
 use Illuminate\Http\Request;
 use App\Models\Naive;
 
@@ -23,6 +32,23 @@ class HitunganNaive extends Controller
         return view('pages.admin.perhitungan')->with([
             'items' => $items
         ]);
+    }
+    //EXPORT EXCEL ----------------------
+    public function naiveExportExcel()
+    {
+        return Excel::download(new NaiveExport, 'users.xlsx');
+    }
+
+    //IMPORT EXCEL ----------------------
+    public function naiveImportExcel(Request $request)
+    {
+        $file = $request->file('file');
+        $namafile = $file->getClientOriginalName();
+        $file->move('Datasetdummy', $namafile);
+
+        Excel::import(new NaiveImport, public_path('/Datasetdummy/' . $namafile));
+
+        return redirect()->route('input')->with('pesan', 'Dataset Berhasil ditambakan');
     }
 
     /**

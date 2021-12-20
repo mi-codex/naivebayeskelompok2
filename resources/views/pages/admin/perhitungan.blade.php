@@ -37,6 +37,7 @@
                         <div class="col">
                             <!-- Data Set -->
                             <h3 class="text-success">Data Set</h3> <br>
+                            <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#exampleModal">
                                 Import Data
@@ -54,21 +55,20 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            {{-- IMPORT DATA EXCEL --}}
+                                            <form action="/perhitungan/naiveImport" method="POST" enctype="multipart/form-data">
+                                                {{ csrf_field() }}
                                                 <div class="form-group">
                                                     <label for="exampleFormControlFile1">Masukkan File Excel</label>
-                                                    <input type="file" class="form-control-file"
-                                                        id="exampleFormControlFile1" name="fileexcel">
+                                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="fileexcel" required>
                                                 </div>
                                             </form>
-                                            <a href="/downloadfile" class="text-sm text-success"> >>Download Contoh
-                                                Format
-                                                Excel</a>
+                                            {{-- <a href="/downloadfile" class="text-sm text-success"> >>Download Contoh Format Excel</a> --}}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Kirim Data</button>
+                                            <button type="submit" class="btn btn-success">Kirim Data</button>
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <table class="table table-responsive">
+                            <table class="table table-responsive w-auto">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>NO.</th>
