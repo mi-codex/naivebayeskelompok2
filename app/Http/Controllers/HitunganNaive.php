@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Naive;
 use App\Models\Mahasiswa;
 
@@ -24,6 +25,7 @@ class HitunganNaive extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         $items = Naive::all();
@@ -35,6 +37,200 @@ class HitunganNaive extends Controller
             
         ]);
     }
+
+    // PERHITUNGAN NAIVE BAYES 
+    public function hitungNaive(){
+
+        // P(Ci) LAYAK DAN TIDAK---------------
+        $pciLayak = DB::table('datasets')
+                        ->where('status_beasiswa' , 'LAYAK')
+                        ->count('status_beasiswa'); 
+        
+        $pciTidakLayak = DB::table('datasets')
+                        ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                        ->count('status_beasiswa');
+
+        $totaldata2 = Naive::count();
+
+        $hasilPciLayak = $pciLayak /  $totaldata2;
+        $hasilPciTidakLayak = $pciTidakLayak /  $totaldata2;
+
+        // P(X|Ci) LAYAK DAN TIDAK---------------------------------------
+
+        // PENANGGUNG ORANG TUA
+        $PenanggungOrangTuaLayak = DB::table('datasets')
+                                ->where('penanggung' , 'ORANG TUA')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('penanggung');
+
+        $PenanggungOrangTuaTdkLayak = DB::table('datasets')
+                                ->where('penanggung' , 'ORANG TUA')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('penanggung');       
+
+        $pxciHasilPenanggungOrangTuaLYK = $PenanggungOrangTuaLayak / $pciLayak; //layak
+        $pxciHasilPenanggungOrangTuaTDKLYK = $PenanggungOrangTuaTdkLayak / $pciTidakLayak; // tidak layak
+        
+        // PENGHASILAN RENDAH
+        $PenghasilanRendahLayak = DB::table('datasets')
+                                ->where('penghasilan' , 'RENDAH')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('penghasilan');
+
+        $PenghasilanRendahTdkLayak = DB::table('datasets')
+                                ->where('penghasilan' , 'RENDAH')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('penghasilan');
+
+        $pxciHasilPenghasilanRendahLayak = $PenghasilanRendahLayak / $pciLayak; //layak
+        $pxciHasilPenghasilanRendahTidakLayak = $PenghasilanRendahTdkLayak / $pciTidakLayak; //tidak layak
+
+        // KEPEMILIKAN RUMAH  = SEWA
+        $RumahSewaLayak = DB::table('datasets')
+                                ->where('rumah' , 'RUMAH SEWA')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('rumah');
+
+        $RumahSewaLTdkLayak = DB::table('datasets')
+                                ->where('rumah' , 'RUMAH SEWA')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('rumah');
+
+        $pxciHasilRumahSewaLayak = $RumahSewaLayak / $pciLayak; //layak
+        $pxciHasilRumahSewaTidakLayak = $RumahSewaLTdkLayak / $pciTidakLayak; //tidak layak
+
+        //JENIS KELAMIN PENANGGUNG = PEREMPUAN
+        $JenisKelaminLayak = DB::table('datasets')
+                                ->where('jenis_kelamin' , 'PEREMPUAN')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('jenis_kelamin');
+
+        $JenisKelaminTdkLayak = DB::table('datasets')
+                                ->where('jenis_kelamin' , 'PEREMPUAN')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('jenis_kelamin');
+
+        $pxciHasilJenisKelaminLayak = $JenisKelaminLayak / $pciLayak; //layak
+        $pxciHasilJenisKelaminTidakLayak = $JenisKelaminTdkLayak / $pciTidakLayak; //tidak layak
+
+        //PEKERJAAN PENANGGUNG = PEKERJA TIDAK TETAP
+        $PekerjaTdkTetapLayak = DB::table('datasets')
+                                ->where('pekerjaan' , 'PEKERJA TIDAK TETAP')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('pekerjaan');
+
+        $PekerjaTdkTetapTdkLayak = DB::table('datasets')
+                                ->where('pekerjaan' , 'PEKERJA TIDAK TETAP')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('pekerjaan');
+
+        $pxciHasilPekerjaTdkTetapLayak= $PekerjaTdkTetapLayak / $pciLayak; //layak
+        $pxciHasilPekerjaTdkTetapTdkLayak = $PekerjaTdkTetapTdkLayak / $pciTidakLayak; //tidak layak
+
+        //JUMLAH TANGGUNGAN = SEDIKIT
+        $TanggunganSedikitLayak = DB::table('datasets')
+                                ->where('jumlah_tanggungan' , 'SEDIKIT')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('jumlah_tanggungan');
+
+        $TanggunganSedikitTdkLayak = DB::table('datasets')
+                                ->where('jumlah_tanggungan' , 'SEDIKIT')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('jumlah_tanggungan');
+
+        $pxciHasilTanggunganSedikitLayak = $TanggunganSedikitLayak / $pciLayak; //layak
+        $pxciHasilTanggunganSedikitTdkLayak = $TanggunganSedikitTdkLayak / $pciTidakLayak; //tidak layak
+
+        //USIA PENANGGUNG = TUA
+        $UsiaTuaLayak = DB::table('datasets')
+                                ->where('usia' , 'TUA')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('usia');
+
+        $UsiaTuaTdkLayak = DB::table('datasets')
+                                ->where('usia' , 'TUA')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('usia');
+
+        $pxciHasilUsiaTuaLayak = $UsiaTuaLayak / $pciLayak; //layak
+        $pxciHasilUsiaTuaTdkLayak = $UsiaTuaTdkLayak / $pciTidakLayak; //tidak layak
+
+        // NILAI UN = BAIK
+        $NilaiUNBaikLayak = DB::table('datasets')
+                                ->where('nilai_un' , 'BAIK')
+                                ->where('status_beasiswa' , 'LAYAK')
+                                ->count('nilai_un');
+
+        $NilaiUNBaikTdkLayak = DB::table('datasets')
+                                ->where('nilai_un' , 'BAIK')
+                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
+                                ->count('nilai_un');
+
+        $pxciHasilNilaiUNBaikLayak = $NilaiUNBaikLayak / $pciLayak; //layak
+        $pxciHasilNilaiUNBaikTdkLayak = $NilaiUNBaikTdkLayak / $pciTidakLayak; //tidak layak
+
+
+        // P(x|c)*P(c) LAYAK DAN TIDAK LAYAK---------------------------------------
+        $layak = ($pxciHasilPenanggungOrangTuaLYK * 
+                  $pxciHasilPenghasilanRendahLayak *
+                  $pxciHasilRumahSewaLayak *
+                  $pxciHasilJenisKelaminLayak *
+                  $pxciHasilPekerjaTdkTetapLayak *
+                  $pxciHasilTanggunganSedikitLayak *
+                  $pxciHasilUsiaTuaLayak *
+                  $pxciHasilNilaiUNBaikLayak
+        ) * $hasilPciLayak;
+
+        $tidaklayak = ($pxciHasilPenanggungOrangTuaTDKLYK * 
+                  $pxciHasilPenghasilanRendahTidakLayak *
+                  $pxciHasilRumahSewaTidakLayak *
+                  $pxciHasilJenisKelaminTidakLayak *
+                  $pxciHasilPekerjaTdkTetapTdkLayak *
+                  $pxciHasilTanggunganSedikitTdkLayak *
+                  $pxciHasilUsiaTuaTdkLayak *
+                  $pxciHasilNilaiUNBaikTdkLayak
+        ) * $hasilPciTidakLayak;
+        
+        // KESIMPULAN HASIL LAYAK ATAU TIDAK LAYAK
+        
+       
+        return view('pages.admin.hasilperhitungan')->with([
+
+            'hasilPciLayak' => $hasilPciLayak,
+            'hasilPciTidakLayak' => $hasilPciTidakLayak,
+
+            'pxciHasilPenanggungOrangTuaLYK' => $pxciHasilPenanggungOrangTuaLYK,
+            'pxciHasilPenanggungOrangTuaTDKLYK' => $pxciHasilPenanggungOrangTuaTDKLYK,
+            
+            'pxciHasilPenghasilanRendahLayak' => $pxciHasilPenghasilanRendahLayak,
+            'pxciHasilPenghasilanRendahTidakLayak' => $pxciHasilPenghasilanRendahTidakLayak,
+
+            'pxciHasilRumahSewaLayak' => $pxciHasilRumahSewaLayak,
+            'pxciHasilRumahSewaTidakLayak' => $pxciHasilRumahSewaTidakLayak,
+
+            'pxciHasilJenisKelaminLayak' => $pxciHasilJenisKelaminLayak,
+            'pxciHasilJenisKelaminTidakLayak' => $pxciHasilJenisKelaminTidakLayak,
+
+            'pxciHasilPekerjaTdkTetapLayak' => $pxciHasilPekerjaTdkTetapLayak,
+            'pxciHasilPekerjaTdkTetapTdkLayak' => $pxciHasilPekerjaTdkTetapTdkLayak,
+            
+            'pxciHasilTanggunganSedikitLayak' => $pxciHasilTanggunganSedikitLayak,
+            'pxciHasilTanggunganSedikitTdkLayak' => $pxciHasilTanggunganSedikitTdkLayak,
+
+            'pxciHasilUsiaTuaLayak' => $pxciHasilUsiaTuaLayak,
+            'pxciHasilUsiaTuaTdkLayak' => $pxciHasilUsiaTuaTdkLayak,
+
+            'pxciHasilNilaiUNBaikLayak' => $pxciHasilNilaiUNBaikLayak,
+            'pxciHasilNilaiUNBaikTdkLayak' => $pxciHasilNilaiUNBaikTdkLayak,
+
+            'layak' => $layak,
+            'tidaklayak' => $tidaklayak,
+
+        ]);
+
+    }
+
+
     //EXPORT EXCEL ----------------------
     public function naiveExportExcel()
     {
@@ -47,7 +243,7 @@ class HitunganNaive extends Controller
        
         Excel::import(new NaiveImport, 'datasets.xlsx');
 
-        return redirect()->route('naive')->with('pesan', 'Dataset Berhasil ditambakan');
+        return redirect()->route('naive')->with('pesan', 'Dataset Berhasil ditambakan!');
     }
 
     /**
@@ -116,9 +312,5 @@ class HitunganNaive extends Controller
         //
     }
 
-    function downloadFile()
-    {
-        $path = public_path('excel/contoh_format_dataset.xlsx');
-        return response()->download($path);
-    }
+    
 }

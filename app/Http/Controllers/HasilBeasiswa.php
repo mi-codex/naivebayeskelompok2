@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mahasiswa;
+use App\Models\Naive;
 
 class HasilBeasiswa extends Controller
 {
@@ -15,10 +17,22 @@ class HasilBeasiswa extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
-        return view('pages.v_hasilbeasiswa');
+        
+        $items = Mahasiswa::all();
+        $items2 = Naive::all();
+
+        
+        return view('pages.v_hasilbeasiswa')->with([
+            'items' => $items,
+            'items2' => $items2,
+            
+        ]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

@@ -25,8 +25,8 @@ class Mahasiswa extends Model
 
     protected $hidden = [];
 
-    public function penanggung()
+    public function statusBeasiswa()
     {
-        // return $this->hasMany(ProductGallery::class, 'products_id');
+        return $this->belongsTo(Naive::class, 'id', 'id');
     }
 }

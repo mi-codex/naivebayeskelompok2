@@ -22,4 +22,10 @@ class Naive extends Model
         'nilai_un',
         'status_beasiswa'
     ];
+
+    public function statusBeasiswaLYKTDK()
+    {
+        return $this->hasMany(Mahasiswa::class, 'id');
+    }
+
 }

@@ -36,11 +36,13 @@
                     <div class="row mb-3">
                         <div class="col">
                             <!-- Data Set -->
-                            <p class="text-white text-center font-weight-bold bg-info"> Perhatian: Sebelum mengisi Data, pastikan
+                            <p class="text-white text-center font-weight-bold bg-info"> Perhatian: Sebelum mengisi Data,
+                                pastikan
                                 Klik Menu "Panduan"</p>
                             <h2 class="text-success">Tabel Data Set</h2> <br>
                             <a href="/perhitungan/naiveExport" class="btn btn-primary">Export Data</a>
-                            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btn-success " data-toggle="modal"
+                                data-target="#exampleModal">
                                 Import Data
                             </button>
 
@@ -65,15 +67,18 @@
                                             </button>
                                         </div>
                                         {{-- IMPORT DATA EXCEL --}}
-                                        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('import') }}" method="POST"
+                                            enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <div class="modal-body">
-                                               
-                                                    <div class="form-group">
-                                                      <label for="exampleFormControlFile1">Import File Excel (Upload)</label>
-                                                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                                    </div>
-                                                  
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlFile1">Import File Excel
+                                                        (Upload)</label>
+                                                    <input type="file" class="form-control-file"
+                                                        id="exampleFormControlFile1">
+                                                </div>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -97,7 +102,7 @@
                                         <th>PENANGGUNG</th>
                                         <th>PENGHASILAN</th>
                                         <th>KEPEMILIKAN RUMAH</th>
-                                        <th>JENIS KELAMIN</th>
+                                        <th>JENIS KELAMIN PENANGGUNG</th>
                                         <th>PEKERJAAN</th>
                                         <th>JUMLAH TANGGUNGAN</th>
                                         <th>USIA</th>
@@ -126,10 +131,12 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row mt-5">
+                    <div class="row mt-5 ">
                         <div class="col">
                             <h2 class="text-info">Jumlah Total Data Input Mahasiswa Masuk = {{ $jumlahdata }}</h2>
-                            <a href="#" class="btn btn-info">Mulai Perhitungan Naive</a>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <a href="/perhitungan/hasilPerhitungan" class="btn btn-info">Mulai Perhitungan Naive</a>
                         </div>
                     </div>
                 </div>

@@ -31,9 +31,44 @@
                         <!-- Konten  -->
                         <div class="row mb-3">
                             <div class="col">
-                                <!-- Data Set -->
-                                
-                                <p class="text-danger ">Perhatian: Isi data anda secara jujur! dan bila data yang diberikan tidak sesuai maka akan ada sanksi yang anda terima.</p>
+                            <h2 class="text-success mb-3">Seluruh Data Hasil Penerimaan Beasiswa</h2>
+                            <table class="table table-responsive w-auto">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>NO.</th>
+                                        <th>NAMA MAHASISWA</th>
+                                        <th>PENANGGUNG</th>
+                                        <th>PENGHASILAN</th>
+                                        <th>KEPEMILIKAN RUMAH</th>
+                                        <th>JENIS KELAMIN PENANGGUNG</th>
+                                        <th>PEKERJAAN</th>
+                                        <th>JUMLAH TANGGUNGAN</th>
+                                        <th>USIA</th>
+                                        <th>NILAI UN</th>
+                                        <th>STATUS BEASISWA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($items as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->nama_mhs }}</td>
+                                        <td>{{ $item->penanggung }}</td>
+                                        <td>{{ $item->penghasilan }}</td>
+                                        <td>{{ $item->rumah }}</td>
+                                        <td>{{ $item->jenis_kelamin }}</td>
+                                        <td>{{ $item->pekerjaan }}</td>
+                                        <td>{{ $item->jumlah_tanggungan }}</td>
+                                        <td>{{ $item->usia }}</td>
+                                        <td>{{ $item->nilai_un }}</td>
+                                        {{-- @if (  )
+                                        <td class="text-success font-weight-bold">{{ $item }}</td>
+                                        @endif --}}
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
 
                                
                             </div>
