@@ -25,7 +25,7 @@
     <div class="main-content">
 
         <!-- Page content -->
-        <div class="container mt-5 pb-3">
+        <div class="container pb-3" style="margin-top: 100px">
             <div class="row justify-content-center">
                 <!-- card  -->
                 <div class="col-lg-8 col-md-7">
@@ -93,9 +93,12 @@
                                             {{-- <div class="col-6">
                                                 <a href="#" class="text-primary"><small>Lupa Password?</small></a>
                                             </div> --}}
-                                            <div class="col text-right">
+                                            <div class="col-12 text-right">
                                                 <a href="/register" class="text-primary"><small><u>Buat Akun
                                                             Baru</u></small></a>
+                                            </div>
+                                            <div class="mt-3">
+                                                <p>Contact Admin : Admin@gmail.com</p>
                                             </div>
                                         </div>
                                     </form>
