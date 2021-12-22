@@ -27,14 +27,13 @@ Auth::routes();
 
 Route::get('/beranda', [HomeController::class, 'index'])->name('home');
 Route::get('/panduan', [Panduan::class, 'index']);
-Route::get('/hasilbeasiswa', [HasilBeasiswa::class, 'index'])->name('hasil');
+Route::get('/hasilbeasiswa', [HitunganNaive::class, 'hasilBeasiswa'])->name('hasil');
 
 //! Admin
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/perhitungan', [HitunganNaive::class, 'index'])->name('naive');
     Route::get('/perhitungan/naiveExport', [HitunganNaive::class, 'naiveExportExcel']);
     Route::post('/perhitungan/naiveImport', [HitunganNaive::class, 'naiveImportExcel'])->name('import');
-    
     Route::get('/perhitungan/hasilPerhitungan', [HitunganNaive::class, 'hitungNaive']);
 });
 //-------------------------------------------
@@ -47,6 +46,3 @@ Route::group(['middleware' => 'user'], function () {
 });
 //-------------------------------------------
 
-
-// Download File Excel Data Set
-// Route::get('/downloadfile', [ExcelDownloadController::class, 'downloadFile']);

@@ -181,6 +181,7 @@ class HitunganNaive extends Controller
                   $pxciHasilNilaiUNBaikLayak
         ) * $hasilPciLayak;
 
+        
         $tidaklayak = ($pxciHasilPenanggungOrangTuaTDKLYK * 
                   $pxciHasilPenghasilanRendahTidakLayak *
                   $pxciHasilRumahSewaTidakLayak *
@@ -190,6 +191,8 @@ class HitunganNaive extends Controller
                   $pxciHasilUsiaTuaTdkLayak *
                   $pxciHasilNilaiUNBaikTdkLayak
         ) * $hasilPciTidakLayak;
+        
+                
         
         // KESIMPULAN HASIL LAYAK ATAU TIDAK LAYAK
         
@@ -230,6 +233,17 @@ class HitunganNaive extends Controller
 
     }
 
+    // HASIL BEASISWA
+    public function hasilBeasiswa(){
+
+        $items2 = Mahasiswa::all();
+
+        return view('pages.v_hasilbeasiswa')->with([
+            'items2' => $items2,
+            
+        ]);
+
+    }
 
     //EXPORT EXCEL ----------------------
     public function naiveExportExcel()
