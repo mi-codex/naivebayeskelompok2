@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HitunganNaive;
 use App\Http\Controllers\InputdataMahasiswa;
-use App\Http\Controllers\HasilBeasiswa;
 use App\Http\Controllers\Panduan;
-use App\Http\Controllers\ExcelDownloadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +26,7 @@ Auth::routes();
 
 Route::get('/beranda', [HomeController::class, 'index'])->name('home');
 Route::get('/panduan', [Panduan::class, 'index']);
-Route::get('/hasilbeasiswa', [HitunganNaive::class, 'hasilBeasiswa'])->name('hasil');
+Route::get('/hasilbeasiswa', [HitunganNaive::class, 'hasilBeasiswa']);
 
 //! Admin
 Route::group(['middleware' => 'admin'], function () {
@@ -42,7 +41,5 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'user'], function () {
     Route::get('/inputdatamhs', [InputdataMahasiswa::class, 'index'])->name('input');
     Route::post('/inputdatamhs/store', [InputdataMahasiswa::class, 'store']);
-    
 });
 //-------------------------------------------
-

@@ -62,15 +62,11 @@
                                         <td>{{ $item->usia }}</td>
                                         <td>{{ $item->nilai_un }}</td>
                                         
-                                        
-                                        {{-- @if ($layak > $tidaklayak )
+                                        {{-- <td>{{ $hasil }}</td> --}}
+                                        {{-- $layak > $tidaklayak --}}
+                                        {{-- @if ($penentu)
                                         <td>
-                                            <h3 class="text-succes">LAYAK</h3>
-                                        </td>
-                                        
-                                        @elseif ($layak < $tidaklayak ) 
-                                        <td>
-                                            <h3 class="text-danger">TIDAK LAYAK</h3>
+                                            <p class="text-success font-weight-bold">LAYAK</p>
                                         </td>
                                         @endif --}}
 

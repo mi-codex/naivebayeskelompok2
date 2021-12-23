@@ -34,21 +34,22 @@ class HitunganNaive extends Controller
         return view('pages.admin.perhitungan')->with([
             'items' => $items,
             'jumlahdata' => $jumlahdata,
-            
+
         ]);
     }
 
     // PERHITUNGAN NAIVE BAYES 
-    public function hitungNaive(){
+    public function hitungNaive()
+    {
 
         // P(Ci) LAYAK DAN TIDAK---------------
         $pciLayak = DB::table('datasets')
-                        ->where('status_beasiswa' , 'LAYAK')
-                        ->count('status_beasiswa'); 
-        
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('status_beasiswa');
+
         $pciTidakLayak = DB::table('datasets')
-                        ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                        ->count('status_beasiswa');
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('status_beasiswa');
 
         $totaldata2 = Naive::count();
 
@@ -59,144 +60,146 @@ class HitunganNaive extends Controller
 
         // PENANGGUNG ORANG TUA
         $PenanggungOrangTuaLayak = DB::table('datasets')
-                                ->where('penanggung' , 'ORANG TUA')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('penanggung');
+            ->where('penanggung', 'ORANG TUA')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('penanggung');
 
         $PenanggungOrangTuaTdkLayak = DB::table('datasets')
-                                ->where('penanggung' , 'ORANG TUA')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('penanggung');       
+            ->where('penanggung', 'ORANG TUA')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('penanggung');
 
         $pxciHasilPenanggungOrangTuaLYK = $PenanggungOrangTuaLayak / $pciLayak; //layak
         $pxciHasilPenanggungOrangTuaTDKLYK = $PenanggungOrangTuaTdkLayak / $pciTidakLayak; // tidak layak
-        
+
         // PENGHASILAN RENDAH
         $PenghasilanRendahLayak = DB::table('datasets')
-                                ->where('penghasilan' , 'RENDAH')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('penghasilan');
+            ->where('penghasilan', 'RENDAH')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('penghasilan');
 
         $PenghasilanRendahTdkLayak = DB::table('datasets')
-                                ->where('penghasilan' , 'RENDAH')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('penghasilan');
+            ->where('penghasilan', 'RENDAH')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('penghasilan');
 
         $pxciHasilPenghasilanRendahLayak = $PenghasilanRendahLayak / $pciLayak; //layak
         $pxciHasilPenghasilanRendahTidakLayak = $PenghasilanRendahTdkLayak / $pciTidakLayak; //tidak layak
 
         // KEPEMILIKAN RUMAH  = SEWA
         $RumahSewaLayak = DB::table('datasets')
-                                ->where('rumah' , 'RUMAH SEWA')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('rumah');
+            ->where('rumah', 'RUMAH SEWA')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('rumah');
 
         $RumahSewaLTdkLayak = DB::table('datasets')
-                                ->where('rumah' , 'RUMAH SEWA')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('rumah');
+            ->where('rumah', 'RUMAH SEWA')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('rumah');
 
         $pxciHasilRumahSewaLayak = $RumahSewaLayak / $pciLayak; //layak
         $pxciHasilRumahSewaTidakLayak = $RumahSewaLTdkLayak / $pciTidakLayak; //tidak layak
 
         //JENIS KELAMIN PENANGGUNG = PEREMPUAN
         $JenisKelaminLayak = DB::table('datasets')
-                                ->where('jenis_kelamin' , 'PEREMPUAN')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('jenis_kelamin');
+            ->where('jenis_kelamin', 'PEREMPUAN')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('jenis_kelamin');
 
         $JenisKelaminTdkLayak = DB::table('datasets')
-                                ->where('jenis_kelamin' , 'PEREMPUAN')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('jenis_kelamin');
+            ->where('jenis_kelamin', 'PEREMPUAN')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('jenis_kelamin');
 
         $pxciHasilJenisKelaminLayak = $JenisKelaminLayak / $pciLayak; //layak
         $pxciHasilJenisKelaminTidakLayak = $JenisKelaminTdkLayak / $pciTidakLayak; //tidak layak
 
         //PEKERJAAN PENANGGUNG = PEKERJA TIDAK TETAP
         $PekerjaTdkTetapLayak = DB::table('datasets')
-                                ->where('pekerjaan' , 'PEKERJA TIDAK TETAP')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('pekerjaan');
+            ->where('pekerjaan', 'PEKERJA TIDAK TETAP')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('pekerjaan');
 
         $PekerjaTdkTetapTdkLayak = DB::table('datasets')
-                                ->where('pekerjaan' , 'PEKERJA TIDAK TETAP')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('pekerjaan');
+            ->where('pekerjaan', 'PEKERJA TIDAK TETAP')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('pekerjaan');
 
-        $pxciHasilPekerjaTdkTetapLayak= $PekerjaTdkTetapLayak / $pciLayak; //layak
+        $pxciHasilPekerjaTdkTetapLayak = $PekerjaTdkTetapLayak / $pciLayak; //layak
         $pxciHasilPekerjaTdkTetapTdkLayak = $PekerjaTdkTetapTdkLayak / $pciTidakLayak; //tidak layak
 
         //JUMLAH TANGGUNGAN = SEDIKIT
         $TanggunganSedikitLayak = DB::table('datasets')
-                                ->where('jumlah_tanggungan' , 'SEDIKIT')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('jumlah_tanggungan');
+            ->where('jumlah_tanggungan', 'SEDIKIT')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('jumlah_tanggungan');
 
         $TanggunganSedikitTdkLayak = DB::table('datasets')
-                                ->where('jumlah_tanggungan' , 'SEDIKIT')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('jumlah_tanggungan');
+            ->where('jumlah_tanggungan', 'SEDIKIT')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('jumlah_tanggungan');
 
         $pxciHasilTanggunganSedikitLayak = $TanggunganSedikitLayak / $pciLayak; //layak
         $pxciHasilTanggunganSedikitTdkLayak = $TanggunganSedikitTdkLayak / $pciTidakLayak; //tidak layak
 
         //USIA PENANGGUNG = TUA
         $UsiaTuaLayak = DB::table('datasets')
-                                ->where('usia' , 'TUA')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('usia');
+            ->where('usia', 'TUA')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('usia');
 
         $UsiaTuaTdkLayak = DB::table('datasets')
-                                ->where('usia' , 'TUA')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('usia');
+            ->where('usia', 'TUA')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('usia');
 
         $pxciHasilUsiaTuaLayak = $UsiaTuaLayak / $pciLayak; //layak
         $pxciHasilUsiaTuaTdkLayak = $UsiaTuaTdkLayak / $pciTidakLayak; //tidak layak
 
         // NILAI UN = BAIK
         $NilaiUNBaikLayak = DB::table('datasets')
-                                ->where('nilai_un' , 'BAIK')
-                                ->where('status_beasiswa' , 'LAYAK')
-                                ->count('nilai_un');
+            ->where('nilai_un', 'BAIK')
+            ->where('status_beasiswa', 'LAYAK')
+            ->count('nilai_un');
 
         $NilaiUNBaikTdkLayak = DB::table('datasets')
-                                ->where('nilai_un' , 'BAIK')
-                                ->where('status_beasiswa' , 'TIDAK-LAYAK')
-                                ->count('nilai_un');
+            ->where('nilai_un', 'BAIK')
+            ->where('status_beasiswa', 'TIDAK-LAYAK')
+            ->count('nilai_un');
 
         $pxciHasilNilaiUNBaikLayak = $NilaiUNBaikLayak / $pciLayak; //layak
         $pxciHasilNilaiUNBaikTdkLayak = $NilaiUNBaikTdkLayak / $pciTidakLayak; //tidak layak
 
 
         // P(x|c)*P(c) LAYAK DAN TIDAK LAYAK---------------------------------------
-        $layak = ($pxciHasilPenanggungOrangTuaLYK * 
-                  $pxciHasilPenghasilanRendahLayak *
-                  $pxciHasilRumahSewaLayak *
-                  $pxciHasilJenisKelaminLayak *
-                  $pxciHasilPekerjaTdkTetapLayak *
-                  $pxciHasilTanggunganSedikitLayak *
-                  $pxciHasilUsiaTuaLayak *
-                  $pxciHasilNilaiUNBaikLayak
+        global $layak, $tidaklayak;
+
+        $layak = ($pxciHasilPenanggungOrangTuaLYK *
+            $pxciHasilPenghasilanRendahLayak *
+            $pxciHasilRumahSewaLayak *
+            $pxciHasilJenisKelaminLayak *
+            $pxciHasilPekerjaTdkTetapLayak *
+            $pxciHasilTanggunganSedikitLayak *
+            $pxciHasilUsiaTuaLayak *
+            $pxciHasilNilaiUNBaikLayak
         ) * $hasilPciLayak;
 
-        
-        $tidaklayak = ($pxciHasilPenanggungOrangTuaTDKLYK * 
-                  $pxciHasilPenghasilanRendahTidakLayak *
-                  $pxciHasilRumahSewaTidakLayak *
-                  $pxciHasilJenisKelaminTidakLayak *
-                  $pxciHasilPekerjaTdkTetapTdkLayak *
-                  $pxciHasilTanggunganSedikitTdkLayak *
-                  $pxciHasilUsiaTuaTdkLayak *
-                  $pxciHasilNilaiUNBaikTdkLayak
+
+        $tidaklayak = ($pxciHasilPenanggungOrangTuaTDKLYK *
+            $pxciHasilPenghasilanRendahTidakLayak *
+            $pxciHasilRumahSewaTidakLayak *
+            $pxciHasilJenisKelaminTidakLayak *
+            $pxciHasilPekerjaTdkTetapTdkLayak *
+            $pxciHasilTanggunganSedikitTdkLayak *
+            $pxciHasilUsiaTuaTdkLayak *
+            $pxciHasilNilaiUNBaikTdkLayak
         ) * $hasilPciTidakLayak;
-        
-                
-        
+
+
+
         // KESIMPULAN HASIL LAYAK ATAU TIDAK LAYAK
-        
-       
+
+
         return view('pages.admin.hasilperhitungan')->with([
 
             'hasilPciLayak' => $hasilPciLayak,
@@ -204,7 +207,7 @@ class HitunganNaive extends Controller
 
             'pxciHasilPenanggungOrangTuaLYK' => $pxciHasilPenanggungOrangTuaLYK,
             'pxciHasilPenanggungOrangTuaTDKLYK' => $pxciHasilPenanggungOrangTuaTDKLYK,
-            
+
             'pxciHasilPenghasilanRendahLayak' => $pxciHasilPenghasilanRendahLayak,
             'pxciHasilPenghasilanRendahTidakLayak' => $pxciHasilPenghasilanRendahTidakLayak,
 
@@ -216,7 +219,7 @@ class HitunganNaive extends Controller
 
             'pxciHasilPekerjaTdkTetapLayak' => $pxciHasilPekerjaTdkTetapLayak,
             'pxciHasilPekerjaTdkTetapTdkLayak' => $pxciHasilPekerjaTdkTetapTdkLayak,
-            
+
             'pxciHasilTanggunganSedikitLayak' => $pxciHasilTanggunganSedikitLayak,
             'pxciHasilTanggunganSedikitTdkLayak' => $pxciHasilTanggunganSedikitTdkLayak,
 
@@ -230,19 +233,22 @@ class HitunganNaive extends Controller
             'tidaklayak' => $tidaklayak,
 
         ]);
-
     }
 
-    // HASIL BEASISWA
-    public function hasilBeasiswa(){
 
+    // HASIL BEASISWA
+    public function hasilBeasiswa()
+    {
         $items2 = Mahasiswa::all();
+
+        // $hasil = $this->hitungNaive('layak');
+
 
         return view('pages.v_hasilbeasiswa')->with([
             'items2' => $items2,
-            
-        ]);
+            // 'hasil' => $hasil,
 
+        ]);
     }
 
     //EXPORT EXCEL ----------------------
@@ -254,7 +260,7 @@ class HitunganNaive extends Controller
     //IMPORT EXCEL ----------------------
     public function naiveImportExcel(Request $request)
     {
-       
+
         Excel::import(new NaiveImport, 'datasets.xlsx');
 
         return redirect()->route('naive')->with('pesan', 'Dataset Berhasil ditambakan!');
@@ -325,6 +331,4 @@ class HitunganNaive extends Controller
     {
         //
     }
-
-    
 }
